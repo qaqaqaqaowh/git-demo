@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+	<a href="{{ url_for('profile') }}">Go to profile</a>
+	<form action="{{ url_for('submit') }}" method="POST">
+		<input type="text" name="todo_task">
+		<input type="submit">
+	</form>
+	<ul>
+		{% for todo in todos %}
+			<li>{{ todo.todo }}</li>
+		{% endfor %}
+	</ul>
+{% endblock %}
