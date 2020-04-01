@@ -1,4 +1,4 @@
 import peeweedbevolve
-from models.todo import Todo, db
+from models.user import User, db
 
 db.evolve()

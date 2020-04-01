@@ -1,25 +1,25 @@
-from flask import Flask, render_template, request, redirect
-from models.todo import Todo
+from flask import Flask, render_template, request, redirect, url_for
+from models.user import User
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-	todos = Todo.select()
-	return render_template("hello_world.html", todos=todos)
+	users = User.select()
+	return render_template("hello_world.html", users=users)
 
-@app.route("/profile")
-def profile():
-	return render_template("profile.html")
+@app.route("/profile/<username>")
+def profile(username):
+	return render_template("profile.html", username=username)
 
 @app.route("/submit", methods=["POST"])
 def submit():
-	Todo.create(todo=request.form.get("todo_task"))
+	User.create(username=request.form.get("username"))
 	return redirect("/")
 
-@app.route("/asd")
-def asd():
-	pass
+@app.route("/users/<username>", methods=["POST"])
+def update(username):
+	return redirect(f"/profile/{username}")
 
 app.run()
 
